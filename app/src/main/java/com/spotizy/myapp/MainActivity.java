@@ -12,6 +12,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -265,9 +266,13 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
             @Override
             public void onClick(View v) {
                 int resultCode = 0;
-                Intent intent = new Intent(getApplicationContext(), CreateActivity.class);
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivityForResult(intent, resultCode);
+
+                intent = new Intent(getApplicationContext(), CreateActivity.class);
                 //intent.putExtra("interestid", 0);
-                intent.putExtra("interests", interests);
+                intent.putStringArrayListExtra("interests", interests);
                 startActivityForResult(intent, resultCode);
             }
         });

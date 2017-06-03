@@ -81,6 +81,10 @@ public class WebApiDataTask extends AsyncTask<String, Integer, String> {
                             //strURL.concat("/message");
                             strURL += "/likeactivity";
                             break;
+                        case "otpconfirm":
+                            //strURL.concat("/message");
+                            strURL += "/otpconfirm";
+                            break;
                         case "shareactivity":
                             //strURL.concat("/message");
                             strURL += "/shareactivity";
@@ -171,6 +175,13 @@ public class WebApiDataTask extends AsyncTask<String, Integer, String> {
                 String ret = (String)jsonObject.getString("result");
                 System.out.println("#####  Result = "+ret);
                 ((CreateActivity)this.activity).creationCompleted(true);
+                //finish();
+            }
+            else if (type.equals("otpconfirm")) {
+                //ArrayList<InterestData> interestData = new ArrayList<InterestData>();
+                String ret = (String)jsonObject.getString("result");
+                System.out.println("#####  Result = "+ret);
+                ((LoginActivity)this.activity).otpConfirm(true);
                 //finish();
             }
             else if (type.equals("userpost")) {

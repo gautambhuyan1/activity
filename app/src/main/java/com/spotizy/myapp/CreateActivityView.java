@@ -21,6 +21,7 @@ import com.spotizy.myapp.LoopView;
 import com.spotizy.myapp.DeviceResolution;
 
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public abstract class CreateActivityView extends AppCompatActivity {
 
@@ -33,6 +34,7 @@ public abstract class CreateActivityView extends AppCompatActivity {
     protected GoogleMap mapView;
     protected View viewInterestSelection,viewDateTimeSelection;
     protected PlaceAutocompleteFragment etSearchLocation;
+    protected ArrayList<String> interestList;
     /**
      * Interest picker
      */
@@ -49,6 +51,7 @@ public abstract class CreateActivityView extends AppCompatActivity {
 
 
     protected void init() {
+        interestList = new ArrayList<>();
         initView();
         setSize();
         setTextSize();
@@ -102,11 +105,21 @@ public abstract class CreateActivityView extends AppCompatActivity {
         loop_viewInterest = (LoopView) findViewById(R.id.loop_viewInterest);
     }
 
+    public void setInterestList(ArrayList<String> st) {
+        String i;
+        ListIterator<String> li;
+        li = st.listIterator();
+        while (li.hasNext()) {
+            i = li.next();
+            interestList.add(i);
+        }
+    }
     /*
    Set array for interest picker view
     */
     protected ArrayList<String> getInterest() {
         ArrayList<String> list_interest = new ArrayList<>();
+        /*
         list_interest.add("Music");
         list_interest.add("Food");
         list_interest.add("Sport");
@@ -116,8 +129,8 @@ public abstract class CreateActivityView extends AppCompatActivity {
         list_interest.add("Exhibition");
         list_interest.add("Art");
         list_interest.add("Literature");
-        list_interest.add("Communication");
-        return list_interest;
+        list_interest.add("Communication");*/
+        return interestList;
     }
 
     /*

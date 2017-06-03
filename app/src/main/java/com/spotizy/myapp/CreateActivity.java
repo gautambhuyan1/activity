@@ -70,6 +70,8 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
         getUserContext();
         init();
 
+        interestList = getIntent().getStringArrayListExtra("interests");
+
         setYearMonthPicker();
         r = new Runnable() {
 

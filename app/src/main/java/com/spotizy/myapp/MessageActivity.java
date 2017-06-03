@@ -144,6 +144,11 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
         ivLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int resultCode = 0;
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivityForResult(intent, resultCode);
+
                 //LinkedHashMap<String, String> postParams = new LinkedHashMap<>();
                 JSONObject postParams = new JSONObject();
                 try {
@@ -171,6 +176,12 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
         ivShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                int resultCode = 0;
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivityForResult(intent, resultCode);
+
                 //LinkedHashMap<String, String> postParams = new LinkedHashMap<>();
                 JSONObject postParams = new JSONObject();
                 try {
@@ -198,6 +209,11 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
         ivSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int resultCode = 0;
+
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivityForResult(intent, resultCode);
+
                 String msg = etComment.getText().toString();
                 WebApiDataTask webDataFetcher = new WebApiDataTask(MessageActivity.this);
                 JSONObject postParams = new JSONObject();
