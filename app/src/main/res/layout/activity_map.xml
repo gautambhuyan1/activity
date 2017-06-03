@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mapView"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/rlMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/header_bg">
+
+            <ImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/menu" />
+
+            <RelativeLayout
+                android:id="@+id/rlSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/ivMenu">
+
+                <android.support.v7.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/atvSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:background="@android:color/transparent"
+                    android:hint="Where"
+                    android:imeOptions="actionSearch"
+                    android:singleLine="true"
+                    android:text="" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/ivActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/ivSeparator"
+                android:src="@drawable/activity" />
+
+            <ImageView
+                android:id="@+id/ivSeparator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/ivInterestHover"
+                android:src="@drawable/separator" />
+
+            <ImageView
+                android:id="@+id/ivInterestHover"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/interest" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rlHeader"
+            android:background="@drawable/rounded_background"
+            android:visibility="gone">
+
+            <View
+                android:id="@+id/vwSeperator"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/light_grey"/>
+
+            <ListView
+                android:id="@+id/lv"
+                android:layout_below="@+id/vwSeperator"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </ListView>
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ivAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="left|bottom"
+        android:src="@drawable/add" />
+
+
+</RelativeLayout>
+
+

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/llButtons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnScreenOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="01" />
+
+            <Button
+                android:id="@+id/btnScreenThree"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="03" />
+
+            <Button
+                android:id="@+id/btnScreenFour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="04" />
+
+            <Button
+                android:id="@+id/btnScreenFourItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="04.1" />
+
+            <Button
+                android:id="@+id/btnScreenFive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="05" />
+
+            <Button
+                android:id="@+id/btnScreenSix"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="06" />
+
+            <Button
+                android:id="@+id/btnScreenSixItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="06.1" />
+
+
+            <Button
+                android:id="@+id/btnScreenSeven"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="07" />
+
+            <Button
+                android:id="@+id/btnScreenSevenItem01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07.1" />
+
+            <Button
+                android:id="@+id/btnScreenSevenItem02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="07.2" />
+
+            <Button
+                android:id="@+id/btnScreenNineItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="08" />
+
+            <Button
+                android:id="@+id/btnScreenElevenItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="09" />
+
+
+            <Button
+                android:id="@+id/btnScreenTen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="10" />
+
+            <Button
+                android:id="@+id/btnScreenThirteen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="13" />
+
+            <Button
+                android:id="@+id/btnScreenForteen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="14" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

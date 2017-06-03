@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="default_divider_height">1dp</dimen>
+    <dimen name="default_divider_padding">4dp</dimen>
+
+
+    <item name="backbutton_width" type="dimen" format="float">0.18</item>
+
+    <!-- Circular Picker -->
+    <dimen name="btn_text_size">16sp</dimen>
+    <dimen name="view_text_size">10sp</dimen>
+</resources>

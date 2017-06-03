@@ -1,5 +1,7 @@
 package com.spotizy.myapp;
 
+import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
@@ -9,29 +11,41 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.maps.GoogleMap;
-import com.spotizy.myapp.*;
+//import com.map.activity.R;
+import com.spotizy.myapp.LoopView;
+import com.spotizy.myapp.DeviceResolution;
 
+import java.util.ArrayList;
 
 public abstract class CreateActivityView extends AppCompatActivity {
 
     protected RelativeLayout rlHeader,rlArrow;
-    protected LinearLayout llSearch,llInputData,llActivityName,llInterest,llInterestArrow,llDateTime,llDateIcon,llInterestSelection,llDateTimeSelection;
-    protected ImageView ivArrow,ivInterestArrow,ivDateIcon;
+    protected LinearLayout llSearch,llSearchIcon,llInputData,llActivityName,llInterest,llInterestArrow,llDateTime,llDateIcon,llInterestSelection,llDateTimeSelection;
+    protected ImageView ivArrow,ivSearch,ivInterestArrow,ivDateIcon;
     protected TextView tvHeader,tvInterest,tvDateTime;
     protected EditText etActivityName;
     protected Button btnGo;
     protected GoogleMap mapView;
-    protected ListView scrollItem;
-    protected View viewInterestSelection;
-    protected View viewDateTimeSelection;
+    protected View viewInterestSelection,viewDateTimeSelection;
     protected PlaceAutocompleteFragment etSearchLocation;
+    /**
+     * Interest picker
+     */
+    protected LoopView loop_viewInterest;
+    /**
+     * Date picker
+     */
+    protected LoopView loop_viewDate;
+    /**
+     * Time picker
+     */
+    protected LoopView loop_viewTime;
+
 
 
     protected void init() {
@@ -39,6 +53,7 @@ public abstract class CreateActivityView extends AppCompatActivity {
         setSize();
         setTextSize();
         setListenerToViews();
+        setFont(this);
     }
 
     protected abstract void setListenerToViews();
@@ -52,7 +67,7 @@ public abstract class CreateActivityView extends AppCompatActivity {
         rlArrow=(RelativeLayout)findViewById(R.id.rlArrow);
 
         ivArrow=(ImageView) findViewById(R.id.ivArrow);
-        //ivSearch=(ImageView) findViewById(R.id.ivSearch);
+        ivSearch=(ImageView) findViewById(R.id.ivSearch);
         ivInterestArrow=(ImageView) findViewById(R.id.ivInterestArrow);
         ivDateIcon=(ImageView) findViewById(R.id.ivDateIcon);
 
@@ -60,8 +75,10 @@ public abstract class CreateActivityView extends AppCompatActivity {
                 getFragmentManager().findFragmentById(R.id.etSearchLocation);
         etActivityName=(EditText) findViewById(R.id.etActivityName);
 
+        etActivityName=(EditText) findViewById(R.id.etActivityName);
+
         llSearch=(LinearLayout) findViewById(R.id.llSearch);
-        //llSearchIcon=(LinearLayout) findViewById(R.id.llSearchIcon);
+        llSearchIcon=(LinearLayout) findViewById(R.id.llSearchIcon);
         llInputData=(LinearLayout) findViewById(R.id.llInputData);
         llActivityName=(LinearLayout) findViewById(R.id.llActivityName);
         llInterest=(LinearLayout) findViewById(R.id.llInterest);
@@ -77,9 +94,67 @@ public abstract class CreateActivityView extends AppCompatActivity {
         tvDateTime=(TextView) findViewById(R.id.tvDateTime);
         viewInterestSelection=(View) findViewById(R.id.viewInterestSelection);
         viewDateTimeSelection=(View) findViewById(R.id.viewDateTimeSelection);
-        scrollItem=(ListView) findViewById(R.id.scrollItem);
 
         btnGo=(Button) findViewById(R.id.btnGo);
+
+        loop_viewDate = (LoopView) findViewById(R.id.loop_viewDate);
+        loop_viewTime = (LoopView) findViewById(R.id.loop_viewTime);
+        loop_viewInterest = (LoopView) findViewById(R.id.loop_viewInterest);
+    }
+
+    /*
+   Set array for interest picker view
+    */
+    protected ArrayList<String> getInterest() {
+        ArrayList<String> list_interest = new ArrayList<>();
+        list_interest.add("Music");
+        list_interest.add("Food");
+        list_interest.add("Sport");
+        list_interest.add("Entertainment");
+        list_interest.add("Photography");
+        list_interest.add("Work");
+        list_interest.add("Exhibition");
+        list_interest.add("Art");
+        list_interest.add("Literature");
+        list_interest.add("Communication");
+        return list_interest;
+    }
+
+    /*
+    Set array for date picker view
+     */
+    protected ArrayList<String> getDate() {
+        ArrayList<String> list_date = new ArrayList<>();
+        list_date.add("Thu July 25");
+        list_date.add("Fri July 26");
+        list_date.add("Sat July 27");
+        list_date.add("Sun July 28");
+        list_date.add("Mon July 29");
+        list_date.add("Tue July 30");
+        list_date.add("Wed Aug 01");
+        list_date.add("Thu Aug 02");
+        list_date.add("Fri Aug 03");
+        list_date.add("Sat Aug 04");
+
+        return list_date;
+    }
+
+    /*
+    Set array for time picker view
+     */
+    protected ArrayList<String> getTime() {
+        ArrayList<String> list_time = new ArrayList<>();
+        list_time.add("11 54 AM");
+        list_time.add("11 55 AM");
+        list_time.add("11 56 AM");
+        list_time.add("11 57 AM");
+        list_time.add("11 58 AM");
+        list_time.add("11 59 AM");
+        list_time.add("12 00 AM");
+        list_time.add("12 01 PM");
+        list_time.add("12 02 PM");
+        list_time.add("12 03 PM");
+        return list_time;
     }
 
     /**
@@ -96,7 +171,7 @@ public abstract class CreateActivityView extends AppCompatActivity {
         rlparams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         rlArrow.setLayoutParams(rlparams);
 
-        rlparams = new RelativeLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 6 / 100, DeviceResolution.getScreenHeight(this) * 6 / 100);
+        rlparams = new RelativeLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 5 / 100, DeviceResolution.getScreenHeight(this) * 5 / 100);
         rlparams.addRule(RelativeLayout.CENTER_VERTICAL);
         ivArrow.setLayoutParams(rlparams);
 
@@ -114,7 +189,7 @@ public abstract class CreateActivityView extends AppCompatActivity {
 
         llparams = new LinearLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 5 / 100, DeviceResolution.getScreenWidth(this) * 5 / 100);
         llparams.setMargins((int) (DeviceResolution.getScreenWidth(this) * 0.030), 0, (int) (DeviceResolution.getScreenWidth(this) * 0.010),0);
-        //ivSearch.setLayoutParams(llparams);
+        ivSearch.setLayoutParams(llparams);
 
         FrameLayout.LayoutParams flparams = new FrameLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 90 / 100, LinearLayout.LayoutParams.WRAP_CONTENT);
         flparams.setMargins(0, (int) (DeviceResolution.getScreenHeight(this) * 0.030), 0,(int) (DeviceResolution.getScreenHeight(this) * 0.022));
@@ -147,7 +222,7 @@ public abstract class CreateActivityView extends AppCompatActivity {
         llparams = new LinearLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 90 / 100, DeviceResolution.getScreenHeight(this) * 25 / 100);
         llDateTimeSelection.setLayoutParams(llparams);
 
-        llparams = new LinearLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 22 / 100, DeviceResolution.getScreenHeight(this) * 7 / 100);
+        llparams = new LinearLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 24 / 100, DeviceResolution.getScreenHeight(this) * 7 / 100);
         llparams.setMargins(0, (int) (DeviceResolution.getScreenHeight(this) * 0.030), 0,(int) (DeviceResolution.getScreenHeight(this) * 0.020));
         btnGo.setLayoutParams(llparams);
     }
@@ -163,6 +238,26 @@ public abstract class CreateActivityView extends AppCompatActivity {
         tvInterest.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3));
         tvDateTime.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3));
         btnGo.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3));
+    }
+
+    /**
+     * Set font type for text in different views.
+     *
+     * @param activity
+     */
+
+    private void setFont(Activity activity) {
+
+        Typeface faceBlack = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Black.ttf");
+        tvHeader.setTypeface(faceBlack);
+        btnGo.setTypeface(faceBlack);
+
+        Typeface faceLight = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Light.ttf");
+        //etSearchLocation.setTypeface(faceLight);
+        etActivityName.setTypeface(faceLight);
+        tvInterest.setTypeface(faceLight);
+        tvDateTime.setTypeface(faceLight);
+
     }
 
 }

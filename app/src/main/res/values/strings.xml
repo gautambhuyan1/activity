@@ -1,9 +1,19 @@
 <resources>
-    <string name="app_name">MyApp</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="app_name">Map Activity</string>
+    <string name="interest_details_header">TAJ PALACE</string>
+    <string name="create_activity_header">CREATE ACTIVITY</string>
     <string name="action_settings">Settings</string>
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
-    <string name="interest_details_header">Interest Detail</string>
-    <string name="create_activity_header">Create Activity</string>
+    <string name="login_header">Sign in to continue to \n App Name</string>
+    <string name="name">Name</string>
+    <string name="phn">Phone Number</string>
+    <string name="login_button">GET ACTIVE</string>
+    <string name="OTP_text">An OTP will be sent to the given mobile number within 2 minutes or Resend OTP</string>
+    <string name="OTP_submit">SUBMIT</string>
+    <string name="my_activity">MY ACTIVITY</string>
+    <string name="profile_header">PROFILE</string>
+    <string name="edit_profile_save">SAVE</string>
+    <string name="myinterest">My Interest</string>
+    <string name="interest">MY INTEREST</string>
+    <string name="profile">Profile</string>
+    <string name="myactivity">My Activity</string>
 </resources>

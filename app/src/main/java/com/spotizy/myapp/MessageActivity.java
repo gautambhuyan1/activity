@@ -107,7 +107,7 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
 
         date = intent.getStringExtra("date");
         System.out.println("#### INSIDE Activity latlong "+latitude+" "+longitude);
-        tvPlaceName.setText(interestId);
+        tvCityName.setText(interestId);
         tvName.setText("userid");
         tvDetails.setText(activityNameStr);
         tvLikeCount.setText(likes+" likes");

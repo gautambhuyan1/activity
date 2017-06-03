@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -56,6 +58,9 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
     private String username;
     private LayoutInflater layoutIflator;
 
+    private Runnable r = null;
+    private Handler handler = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +70,19 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
         getUserContext();
         init();
 
+        setYearMonthPicker();
+        r = new Runnable() {
+
+            @Override
+            public void run() {
+                try {
+                    //Log.e("EventsActivity", "run: loopView: " + loop_viewDate.getSelectedItem());
+                    //Log.e("EventsActivity", "run: loopView2: " + loop_viewTime.getSelectedItem());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
 
         context = this.getApplicationContext();
         this.layoutIflator = LayoutInflater.from(this);
@@ -178,6 +196,81 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
             }
         });
     }
+    private void setYearMonthPicker() {
+
+        // Interest Picker
+        loop_viewInterest.setInitPosition(5);
+        loop_viewInterest.setCanLoop(true);
+
+
+        loop_viewInterest.setLoopListener(new LoopScrollListener() {
+            @Override
+            public void onItemSelect(int item) {
+            }
+
+            @Override
+            public void onUserSelectionInProgress(int msgCode) {
+                Log.e("TAG", "onItemSelect " + msgCode + ": new interest selected");
+                try {
+                    handler.removeCallbacks(r);
+                    handler.postDelayed(r, 500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        loop_viewInterest.setTextSize(18);
+        loop_viewInterest.setDataList(getInterest());
+
+        // Date Picker
+        loop_viewDate.setInitPosition(5);
+        loop_viewDate.setCanLoop(true);
+        loop_viewDate.setLoopListener(new LoopScrollListener() {
+            @Override
+            public void onItemSelect(int item) {
+            }
+
+            @Override
+            public void onUserSelectionInProgress(int msgCode) {
+                Log.e("TAG", "onItemSelect " + msgCode + ": new date selected");
+                try {
+                    handler.removeCallbacks(r);
+                    handler.postDelayed(r, 500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+        });
+
+        loop_viewDate.setTextSize(18);//must be called before setDateList
+        loop_viewDate.setDataList(getDate());
+
+        // Time Picker
+        loop_viewTime.setInitPosition(5);
+        loop_viewTime.setCanLoop(true);
+
+
+        loop_viewTime.setLoopListener(new LoopScrollListener() {
+            @Override
+            public void onItemSelect(int item) {
+            }
+
+            @Override
+            public void onUserSelectionInProgress(int msgCode) {
+                Log.e("TAG", "onItemSelect " + msgCode + ": new time selected");
+                try {
+                    handler.removeCallbacks(r);
+                    handler.postDelayed(r, 500);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        loop_viewTime.setTextSize(18);
+        loop_viewTime.setDataList(getTime());
+    }
 
     @Override
     protected void setListenerToViews() {
@@ -197,13 +290,11 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
 
                     llInterestSelection.setVisibility(View.VISIBLE);
                     viewInterestSelection.setVisibility(View.VISIBLE);
-                    scrollItem.setVisibility(View.VISIBLE);
 
                 }else{
 
                     llInterestSelection.setVisibility(View.GONE);
                     viewInterestSelection.setVisibility(View.GONE);
-                    scrollItem.setVisibility(View.GONE);
                 }
 
                 break;
@@ -222,6 +313,7 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
 
                 break;
         }
+
 
 
     }
@@ -325,6 +417,6 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
         //iAdaptor.
 
         //this.viewInterestSelection.setAdapter(iAdaptor);
-        this.scrollItem.setAdapter(iAdaptor);
+        //this.scrollItem.setAdapter(iAdaptor);
     }
 }
