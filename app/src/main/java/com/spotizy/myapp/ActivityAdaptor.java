@@ -2,6 +2,7 @@ package com.spotizy.myapp;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,9 @@ public class ActivityAdaptor extends BaseAdapter implements View.OnClickListener
         public double latitude;
         public double longitude;
         public String activityName;
+        public String place;
+        public String time;
+        public String date;
         //public Button selectedActivity;
         protected TextView tvDateTime, tvDate, tvTime, tvActivityName, tvEventName;
         protected ImageView ivEvent;
@@ -91,6 +95,9 @@ public class ActivityAdaptor extends BaseAdapter implements View.OnClickListener
         aHolder.activityName = a.getActivityName();
         aHolder.latitude = a.getLatitude();
         aHolder.longitude = a.getLongitude();
+        aHolder.place = a.getPlace();
+        aHolder.time = a.getTime();
+        aHolder.date = a.getDate();
         aHolder.tvActivityName.setText(a.getInterestId());
         aHolder.tvEventName.setText(a.getActivityName());
 
@@ -98,6 +105,7 @@ public class ActivityAdaptor extends BaseAdapter implements View.OnClickListener
 
         setSize(aHolder);
         setTextSize(aHolder);
+        setFont(aHolder);
 
         return convert;
 
@@ -115,6 +123,9 @@ public class ActivityAdaptor extends BaseAdapter implements View.OnClickListener
         intent.putExtra("activityname", a.activityName);
         intent.putExtra("latitude", a.latitude);
         intent.putExtra("longitude", a.longitude);
+        intent.putExtra("place", a.place);
+        intent.putExtra("time", a.time);
+        intent.putExtra("date", a.date);
         this.groupActivity.startActivity(intent);
     }
 
@@ -140,6 +151,15 @@ public class ActivityAdaptor extends BaseAdapter implements View.OnClickListener
         a.tvActivityName.setTextSize((float) (DeviceResolution.getScreenInches(groupActivity) * 3.3));
         a.tvEventName.setTextSize((float) (DeviceResolution.getScreenInches(groupActivity) * 3.3));
         a.tvTime.setTextSize((float) (DeviceResolution.getScreenInches(groupActivity) * 3.3));
+
+    }
+
+    private void setFont(ActivityHolder a) {
+        Typeface faceLight = Typeface.createFromAsset(groupActivity.getAssets(), "fonts/Roboto-Light.ttf");
+        a.tvEventName.setTypeface(faceLight);
+        a.tvActivityName.setTypeface(faceLight);
+        a.tvTime.setTypeface(faceLight);
+        a.tvDate.setTypeface(faceLight);
 
     }
 }

@@ -7,6 +7,8 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
@@ -35,9 +37,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
 
 //import android.support.v7.app.AppCompactActivity;
 
@@ -53,7 +58,8 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
     private String interestSelected;
     private ArrayList<String> interests;
     //private PlaceAutocompleteFragment autocompleteFragment;
-    private static String date;
+    private static String date = "1 Aug";
+    private String time = "12:30am";
     private String userid;
     private String username;
     private LayoutInflater layoutIflator;
@@ -169,6 +175,29 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
                 String name = etActivityName.getText().toString();
                 String dateAndTime = date;//activityDateTime.getText().toString();
                 String interest = interestSelected;
+                String place = "";
+
+                List<Address> addresses;
+                Geocoder gcd = new Geocoder(context, Locale.getDefault());
+                try {
+                    addresses = gcd.getFromLocation(latitude, longitude, 1);
+                    if (addresses.size() > 0)
+                    {
+                        System.out.println(addresses.get(0).getLocality());
+                        place = addresses.get(0).getLocality();
+                    }
+                    else
+                    {
+                        // do your staff
+                    }
+                }
+                catch (IOException e) {
+
+                }
+
+                interest = interestList.get(loop_viewInterest.getSelectedItem());
+
+
                 //LinkedHashMap<String, String> postParams = new LinkedHashMap<>();
                 JSONObject postParams = new JSONObject();
                 try {
@@ -178,7 +207,9 @@ public class CreateActivity extends CreateActivityView implements View.OnClickLi
                     postParams.put("activity", name);
                     postParams.put("lat", Double.toString(latitude));
                     postParams.put("lng", Double.toString(longitude));
-                    postParams.put("date", dateAndTime);
+                    postParams.put("place", place);
+                    postParams.put("time", time);
+                    postParams.put("date", date);
 
                 } catch (JSONException e) {
                     System.out.println("Error in JSON");

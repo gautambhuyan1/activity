@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Map Activity</string>
-    <string name="interest_details_header">TAJ PALACE</string>
+    <string name="interest_details_header">Activity detail</string>
     <string name="create_activity_header">CREATE ACTIVITY</string>
     <string name="action_settings">Settings</string>
     <string name="login_header">Sign in to continue to \n App Name</string>

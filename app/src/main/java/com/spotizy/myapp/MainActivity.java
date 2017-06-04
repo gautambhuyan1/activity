@@ -74,8 +74,8 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
     //private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private String mActivityTitle;
-    private String username;
-    private String userid;
+    //private String username;
+    //private String userid;
 
 
     @Override
@@ -85,8 +85,8 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
-        setUserContext();
-        getUserContext();
+        //setUserContext();
+        //getUserContext();
 
         //showInterestList = (Button)this.findViewById(R.id.interest_cancel);
 
@@ -266,9 +266,13 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
             @Override
             public void onClick(View v) {
                 int resultCode = 0;
+                Intent intent;
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivityForResult(intent, resultCode);
+                if (LoginActivity.getLoginStatus() == false) {
+                    intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, resultCode);
+
+                }
 
                 intent = new Intent(getApplicationContext(), CreateActivity.class);
                 //intent.putExtra("interestid", 0);
@@ -412,7 +416,7 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
         try {
             //webDataFetcher.execute("http://hospitopedia.com/activity/get?interestid="+interestId+"&phone=%221234%22&lat="+latitude+"&long="+longitude);
             LinkedHashMap<String,String> getParams=new LinkedHashMap<>();
-            getParams.put("userid", userid);
+            getParams.put("userid", UserCredentials.getUserId());
             getParams.put("interest", interestId);
             getParams.put("lat", Double.toString(latitude));
             getParams.put("lng", Double.toString(longitude));
@@ -498,6 +502,8 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
             intent.putExtra("date", item.getDate());
             intent.putExtra("likes", item.getLikes());
             intent.putExtra("shares", item.getShares());
+            intent.putExtra("place", item.getPlace());
+            intent.putExtra("time", item.getTime());
             this.startActivity(intent);
         }
         return false;
@@ -582,10 +588,5 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
         UserCredentials.setUserId("thisisme");
         UserCredentials.setIMSI("123456");
         UserCredentials.setName("Aptivity user");
-    }
-
-    private void getUserContext() {
-        username = UserCredentials.getUserName();
-        userid = UserCredentials.getUserId();
     }
 }

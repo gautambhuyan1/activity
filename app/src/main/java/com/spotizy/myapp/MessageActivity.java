@@ -45,12 +45,14 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
     private String interestId;
     private double latitude;
     private double longitude;
+    private String place;
     private int likes;
     private int shares;
     private Intent intent;
 
     private String date;
     private String username;
+    private String time;
     private String userid;
     //private WebView webView;
 
@@ -87,23 +89,10 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
         longitude = intent.getDoubleExtra("longitude", 100);
         likes = intent.getIntExtra("likes", 0);
         shares = intent.getIntExtra("shares", 0);
-        Geocoder gcd = new Geocoder(this, Locale.getDefault());
-        List<Address> addresses;
-        try {
-            addresses = gcd.getFromLocation(latitude, longitude, 1);
-            if (addresses.size() > 0)
-            {
-                System.out.println(addresses.get(0).getLocality());
-                tvCityName.setText(addresses.get(0).getLocality());
-            }
-            else
-            {
-                // do your staff
-            }
-        }
-        catch (IOException e) {
+        place = intent.getStringExtra("place");
+        time = intent.getStringExtra("time");
+        tvCityName.setText(place);
 
-        }
 
         date = intent.getStringExtra("date");
         System.out.println("#### INSIDE Activity latlong "+latitude+" "+longitude);
@@ -146,8 +135,11 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
             public void onClick(View v) {
                 int resultCode = 0;
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivityForResult(intent, resultCode);
+                if (LoginActivity.getLoginStatus() == false) {
+                    intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, resultCode);
+
+                }
 
                 //LinkedHashMap<String, String> postParams = new LinkedHashMap<>();
                 JSONObject postParams = new JSONObject();
@@ -179,8 +171,11 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
 
                 int resultCode = 0;
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivityForResult(intent, resultCode);
+                if (LoginActivity.getLoginStatus() == false) {
+                    intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, resultCode);
+
+                }
 
                 //LinkedHashMap<String, String> postParams = new LinkedHashMap<>();
                 JSONObject postParams = new JSONObject();
@@ -211,8 +206,11 @@ public class MessageActivity extends ActivityDetailsView implements OnMapReadyCa
             public void onClick(View v) {
                 int resultCode = 0;
 
-                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivityForResult(intent, resultCode);
+                if (LoginActivity.getLoginStatus() == false) {
+                    intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivityForResult(intent, resultCode);
+
+                }
 
                 String msg = etComment.getText().toString();
                 WebApiDataTask webDataFetcher = new WebApiDataTask(MessageActivity.this);

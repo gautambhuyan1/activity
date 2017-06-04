@@ -83,8 +83,11 @@ public class LoginActivity extends LoginActivityView{
     }
 
 
-    public void otpConfirm(boolean result) {
+    public void otpConfirm(boolean result, String userid, String username, String imsi) {
         if (result) {
+            UserCredentials.setUserId(userid);
+            UserCredentials.setName(username);
+            UserCredentials.setIMSI(imsi);
             loggedOn = true;
             finish();
         }

@@ -29,6 +29,7 @@ public class WebApiDataTask extends AsyncTask<String, Integer, String> {
     protected String doInBackground(String... str) {
         String strURL = "https://gautambhuyan.herokuapp.com";
         //String strURL = "http://10.0.0.4:5000";
+        //String strURL = "http://172.20.20.20:5000";
         String method = str[0];
         String methodName = str[1];
         String params = str[2];
@@ -131,10 +132,12 @@ public class WebApiDataTask extends AsyncTask<String, Integer, String> {
                     int likes = group.getInt("likes");
                     int shares = group.getInt("shares");
                     String date = group.getString("date");
+                    String place = group.getString("place");
+                    String time = group.getString("time");
                     JSONArray location = group.getJSONArray("location");
                     double latitude = location.getDouble(0);
                     double longitude = location.getDouble(1);
-                    activityData.add(new ActivityData(interestId, userid, username, activityId, latitude, longitude, activity, date, likes, shares));
+                    activityData.add(new ActivityData(interestId, userid, username, activityId, latitude, longitude, activity, place, date, time, likes, shares));
                     //System.out.println(latitude + " " + longitude + " " + activity + " " + activity);
                     System.out.println("Done here");
                 }
@@ -180,8 +183,13 @@ public class WebApiDataTask extends AsyncTask<String, Integer, String> {
             else if (type.equals("otpconfirm")) {
                 //ArrayList<InterestData> interestData = new ArrayList<InterestData>();
                 String ret = (String)jsonObject.getString("result");
+                JSONObject userdetails = jsonObject.getJSONObject("userdetail");
+                String userid = userdetails.getString("userid");
+                String username = userdetails.getString("username");
+                String imsi = userdetails.getString("imsi");
                 System.out.println("#####  Result = "+ret);
-                ((LoginActivity)this.activity).otpConfirm(true);
+                ((LoginActivity)this.activity).otpConfirm(true, userid, username, imsi);
+                //((LoginActivity)this.activity).otpConfirm(true, userid, "Gautam", "5129984612");
                 //finish();
             }
             else if (type.equals("userpost")) {

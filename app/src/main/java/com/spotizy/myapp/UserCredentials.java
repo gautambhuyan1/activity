@@ -5,7 +5,7 @@ package com.spotizy.myapp;
  */
 
 public class UserCredentials {
-    private static String userid;
+    private static String userid = "dummy";
     private static String imsi;
     private static String name;
 

@@ -14,8 +14,10 @@ public class ActivityData {
     private String name;
     private int likes;
     private int shares;
+    private String place;
+    private String time;
 
-    public ActivityData (String interestId, String userid, String username, String activityId, double latitude, double longitude, String name, String date, int likes, int shares) {
+    public ActivityData (String interestId, String userid, String username, String activityId, double latitude, double longitude, String name, String place, String date, String time, int likes, int shares) {
         this.interestId = interestId;
         this.activityId = activityId;
         this.userid = userid;
@@ -26,6 +28,8 @@ public class ActivityData {
         this.date = new String(date);
         this.likes = likes;
         this.shares = shares;
+        this.place = place;
+        this.time = time;
     }
 
     public String getInterestId() {
@@ -56,7 +60,11 @@ public class ActivityData {
         return this.name;
     }
 
+    public String getPlace() {return this.place;}
+
     public String getDate() {return this.date;}
+
+    public String getTime() {return this.time;}
 
     public int getLikes() {return this.likes;}
 

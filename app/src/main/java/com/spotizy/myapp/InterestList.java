@@ -1,6 +1,7 @@
 package com.spotizy.myapp;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +86,7 @@ public class InterestList extends BaseAdapter implements View.OnClickListener {
 
         setSize(iHolder);
         setTextSize(iHolder);
+        setFont(iHolder);
 
         return convert;
 
@@ -114,6 +116,13 @@ public class InterestList extends BaseAdapter implements View.OnClickListener {
 
     protected void setTextSize(InterestHolder a) {
         a.tvItemName.setTextSize((float) (DeviceResolution.getScreenInches(groupActivity) * 3.8));
+
+    }
+
+
+    private void setFont(InterestHolder a) {
+        Typeface faceLight = Typeface.createFromAsset(groupActivity.getAssets(), "fonts/Roboto-Light.ttf");
+        a.tvItemName.setTypeface(faceLight);
 
     }
 }
