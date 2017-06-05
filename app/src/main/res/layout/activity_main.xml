@@ -5,135 +5,240 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/map_show"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/rlMain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/rounded_background">
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map_show"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
         <RelativeLayout
-            android:id="@+id/rlHeader"
+            android:id="@+id/rlMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            android:background="@android:color/transparent">
-
-            <ImageView
-                android:id="@+id/ivMenu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/menu" />
+            android:background="@drawable/rounded_background">
 
             <RelativeLayout
-                android:id="@+id/rlSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/ivMenu">
-
-            <fragment
-                android:id="@+id/atvSearch"
+                android:id="@+id/rlHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" />
+
+                android:background="@android:color/transparent">
+
+                <ImageView
+                    android:id="@+id/ivMenu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/menu" />
+
+                <RelativeLayout
+                    android:id="@+id/rlSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/ivMenu">
+
+                    <fragment
+                        android:id="@+id/atvSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/ivActivity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/ivSeparator"
+                    android:src="@drawable/activity" />
+
+                <ImageView
+                    android:id="@+id/ivSeparator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/ivInterestHover"
+                    android:src="@drawable/separator" />
+
+                <ImageView
+                    android:id="@+id/ivInterestHover"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/interest" />
+
+                <View
+                    android:id="@+id/vwSeperator"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/ivMenu"
+                    android:background="@color/light_grey"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 
-            <ImageView
-                android:id="@+id/ivActivity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/ivSeparator"
-                android:src="@drawable/activity" />
-
-            <ImageView
-                android:id="@+id/ivSeparator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/ivInterestHover"
-                android:src="@drawable/separator" />
-
-            <ImageView
-                android:id="@+id/ivInterestHover"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:src="@drawable/interest" />
-
-            <View
-                android:id="@+id/vwSeperator"
+            <RelativeLayout
+                android:id="@+id/rlActivity"
                 android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_below="@+id/ivMenu"
-                android:background="@color/light_grey"
-                android:visibility="gone" />
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlHeader"
+                android:visibility="gone">
 
+                <ListView
+                    android:id="@+id/lv"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rlInterest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rlHeader"
+                android:visibility="gone">
+
+                <ListView
+                    android:id="@+id/ll"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </ListView>
+
+            </RelativeLayout>
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/rlActivity"
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/ivAdd"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rlHeader"
-            android:visibility="gone">
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="left|bottom"
+            android:src="@drawable/add" />
 
-            <ListView
-                android:id="@+id/lv"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
 
-            </ListView>
-
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/rlInterest"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rlHeader"
-            android:visibility="gone">
-
-            <ListView
-                android:id="@+id/ll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </ListView>
-
-        </RelativeLayout>
     </RelativeLayout>
-
-    <ImageView
-        android:id="@+id/ivAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="left|bottom"
-        android:src="@drawable/add" />
-
-
-</RelativeLayout>
-
     <!-- Side navigation drawer UI -->
-    <ListView
-        android:id="@+id/options_list"
-        android:layout_width="300dp"
+    <LinearLayout
+
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="left|start"
-        android:background="#ffeeeeee"/>
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:id="@+id/ll_slider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/blue_bg"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2">
+
+                    <LinearLayout
+                        android:id="@+id/ll_profile_name_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="left|center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Michalle William"
+                            android:textStyle="bold"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+91 9830012345"
+                            android:textColor="@color/white" />
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_menu_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_interest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/myinterest"
+                        android:textColor="@color/black"/>
+
+                    <TextView
+                        android:id="@+id/tv_activity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/myactivity"
+                        android:textColor="@color/black"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
 
 </android.support.v4.widget.DrawerLayout>

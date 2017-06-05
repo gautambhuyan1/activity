@@ -63,6 +63,12 @@
             android:name="LoginActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".MyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MyInterest"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".CreateActivity"
             android:label="@string/app_name"
             android:configChanges="orientation"

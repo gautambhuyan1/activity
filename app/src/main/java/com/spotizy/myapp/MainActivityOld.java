@@ -1,6 +1,5 @@
 package com.spotizy.myapp;
 
-import com.spotizy.myapp.MapActivityView;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -9,10 +8,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,16 +15,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -40,15 +31,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.ListIterator;
 
 
-public class MainActivity extends MapActivityView implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, PlaceSelectionListener  {
+public class MainActivityOld extends MapActivityView implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener, PlaceSelectionListener  {
 
     private static final int MY_PERMISSION_ACCESS_COURSE_LOCATION = 1;
     private Context context;
@@ -101,7 +89,7 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
         context = this.getApplicationContext();
 
         /* ###*/
-        //mDrawerList = (ListView)findViewById(R.id.options_list);
+        mDrawerList = (ListView)findViewById(R.id.options_list);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
         mActivityTitle = getTitle().toString();
 
@@ -130,7 +118,7 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
         if ( ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
 
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_COARSE_LOCATION},
-                    MainActivity.MY_PERMISSION_ACCESS_COURSE_LOCATION);
+                    MainActivityOld.MY_PERMISSION_ACCESS_COURSE_LOCATION);
         }
 
         //webView = (WebView)this.findViewById(R.id.json_display);
@@ -162,7 +150,7 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
             System.out.println("#### Found location latitude = "+latitude+" longitude = "+longitude);
         }
         //Intent intent = new Intent(getApplicationContext(), InterestActivity.class);
-        WebApiDataTask interestDataFetcher = new WebApiDataTask(MainActivity.this);
+        WebApiDataTask interestDataFetcher = new WebApiDataTask(MainActivityOld.this);
         try {
             LinkedHashMap<String,String> getParams=new LinkedHashMap<>();
             //check whether the msg empty or not
@@ -212,6 +200,56 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
             }
         });
 
+        /*
+        interestList.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+
+                interestSelected = interestList.getSelectedItem().toString();
+                interestSelected = "[\""+interestSelected+"\"]";
+                getActivitiesOnInterest(interestSelected);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // Do nothing
+
+            }
+
+        });
+*/
+        /*
+        createUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //LinkedHashMap<String, String> postParams = new LinkedHashMap<>();
+                JSONObject postParams = new JSONObject();
+                try {
+                    postParams.put("username", "Nandy");
+                    postParams.put("imsi", "+1123456789");
+
+                } catch (JSONException e) {
+                    System.out.println("Error in JSON");
+                }
+
+                WebApiDataTask webDataFetcher = new WebApiDataTask(MainActivity.this);
+                try {
+
+                    //check whether the msg empty or not
+
+                    String postURL = postParams.toString();//ServerDataRetriever.createPostURL(postParams);
+                    webDataFetcher.execute("POST", "user", postURL);
+                    webDataFetcher.cancel(true);
+                }
+                //finish();
+
+            }
+        });
+*/
+
         ivAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -231,16 +269,16 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
             }
         });
 
-/*
+
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivityOld.this, "Time for an upgrade!", Toast.LENGTH_SHORT).show();
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
 
             }
         });
-*/
+
         ivActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -276,22 +314,6 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
                     rlInterest.setVisibility(View.GONE);
                     vwSeperator.setVisibility(View.GONE);
                 }
-            }
-        });
-
-        tv_interest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyInterest.class);
-                startActivity(intent);
-            }
-        });
-
-        tv_activity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MyActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -378,7 +400,7 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
         vwSeperator.setVisibility(View.GONE);
 
         System.out.println("onActivityResult:interestId = "+interestId);
-        WebApiDataTask webDataFetcher = new WebApiDataTask(MainActivity.this);
+        WebApiDataTask webDataFetcher = new WebApiDataTask(MainActivityOld.this);
         try {
             //webDataFetcher.execute("http://hospitopedia.com/activity/get?interestid="+interestId+"&phone=%221234%22&lat="+latitude+"&long="+longitude);
             LinkedHashMap<String,String> getParams=new LinkedHashMap<>();
@@ -483,8 +505,8 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
 
     private void addDrawerItems() {
         String[] osArray = { "User details", "Interests", "Activities"};
-        //mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
-        //mDrawerList.setAdapter(mAdapter);
+        mAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        mDrawerList.setAdapter(mAdapter);
     }
 
     private void setupDrawer() {
@@ -526,7 +548,7 @@ public class MainActivity extends MapActivityView implements OnMapReadyCallback,
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

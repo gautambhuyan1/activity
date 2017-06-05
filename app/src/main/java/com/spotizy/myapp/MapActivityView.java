@@ -1,5 +1,7 @@
 package com.spotizy.myapp;
 
+import android.app.Activity;
+import android.graphics.Typeface;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +9,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,10 +39,25 @@ public abstract class MapActivityView extends AppCompatActivity {
     protected ActionBarDrawerToggle mDrawerToggle;
     protected DrawerLayout mDrawerLayout;
 
+    //New drawerlayout content
+    protected LinearLayout ll_profile_name_number, ll_slider, ll_menu_list;
+    protected TextView tv_no, tv_name, tv_profile, tv_activity, tv_interest;
+    protected ImageView iv_profileimage;
+
+
     protected void init() {
         initView();
         setSize();
+
+        setTextSize();
+        setFont(this);
         setListenerToViews();
+
+        initDrawerComponetsView();
+        setDrawerComponetsSize();
+        setDrawerComponetsTextSize();
+        setDrawerComponetsFont(this);
+
     }
 
     protected abstract void setListenerToViews();
@@ -136,4 +155,91 @@ public abstract class MapActivityView extends AppCompatActivity {
         ivAdd.setLayoutParams(rlparams);
         ivAdd.setPadding(10, 10, 10, 10);
     }
+
+    /**
+     * Set text size for text view, edit text, buttons etc.
+     */
+    private void setTextSize() {
+        //atvSearch.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3));
+    }
+
+
+    /**
+     * Set font type for text in different views.
+     *
+     * @param activity
+     */
+    private void setFont(Activity activity) {
+        Typeface faceLight = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Light.ttf");
+        //atvSearch.setTypeface(faceLight);
+    }
+
+    //Drawer content manipulators
+
+
+
+    protected void initDrawerComponetsView() {
+        ll_slider = (LinearLayout) findViewById(R.id.ll_slider);
+        ll_menu_list = (LinearLayout) findViewById(R.id.ll_menu_list);
+        ll_profile_name_number = (LinearLayout) findViewById(R.id.ll_profile_name_number);
+        tv_profile = (TextView) findViewById(R.id.tv_profile);
+        tv_activity = (TextView) findViewById(R.id.tv_activity);
+        tv_interest = (TextView) findViewById(R.id.tv_interest);
+        tv_name = (TextView) findViewById(R.id.tv_name);
+        tv_no = (TextView) findViewById(R.id.tv_no);
+        //iv_profileimage = (ImageView) findViewById(R.id.iv_profileimage);
+    }
+
+
+    protected void setDrawerComponetsSize() {
+
+        LinearLayout.LayoutParams llparams = new LinearLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 75 / 100, LinearLayout.LayoutParams.MATCH_PARENT);
+        ll_slider.setLayoutParams(llparams);
+        llparams = new LinearLayout.LayoutParams(DeviceResolution.getScreenWidth(this) * 18 / 100, DeviceResolution.getScreenWidth(this) * 18 / 100);
+        llparams.setMargins(DeviceResolution.getScreenWidth(this) * 5 / 100, 0, 0, 0);
+        //iv_profileimage.setLayoutParams(llparams);
+
+        llparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        llparams.setMargins(DeviceResolution.getScreenWidth(this) * 6 / 100, 0, DeviceResolution.getScreenWidth(this) * 6 / 100, 0);
+        ll_menu_list.setLayoutParams(llparams);
+
+        llparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        llparams.setMargins(0, DeviceResolution.getScreenHeight(this) * 4 / 100, 0, DeviceResolution.getScreenHeight(this) * 1 / 100);
+        tv_profile.setLayoutParams(llparams);
+
+        llparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        llparams.setMargins(0, DeviceResolution.getScreenHeight(this) * 3 / 100, 0, DeviceResolution.getScreenHeight(this) * 1 / 100);
+        tv_activity.setLayoutParams(llparams);
+
+        llparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        llparams.setMargins(0, DeviceResolution.getScreenHeight(this) * 3 / 100, 0, DeviceResolution.getScreenHeight(this) * 1 / 100);
+        tv_interest.setLayoutParams(llparams);
+
+
+    }
+
+
+    protected void setDrawerComponetsTextSize() {
+        tv_profile.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3.2));
+        tv_activity.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3.2));
+        tv_interest.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3.2));
+        tv_name.setTextSize((float) (DeviceResolution.getScreenInches(this) * 3.5));
+        tv_no.setTextSize((float) (DeviceResolution.getScreenInches(this) * 2.8));
+
+    }
+
+
+
+    private void setDrawerComponetsFont(Activity activity) {
+
+        Typeface faceRegular = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Regular.ttf");
+        tv_name.setTypeface(faceRegular);
+        tv_profile.setTypeface(faceRegular);
+        tv_activity.setTypeface(faceRegular);
+        tv_interest.setTypeface(faceRegular);
+
+        Typeface faceLight = Typeface.createFromAsset(activity.getAssets(), "fonts/Roboto-Light.ttf");
+        tv_no.setTypeface(faceLight);
+    }
+
 }
